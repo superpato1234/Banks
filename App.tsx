@@ -1,21 +1,8 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
+import {SafeAreaView, StyleSheet, useColorScheme} from 'react-native';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
+import BankStack from './src/router/BankStack';
+import {NavigationContainer} from '@react-navigation/native';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -23,21 +10,28 @@ function App(): React.JSX.Element {
   const backgroundStyle = {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
-  const textColorStyle = {
-    color: isDarkMode ? 'white' : 'black',
-  };
+
+  // const getBanks = async () => {
+  //   const res = await fetch(
+  //     'https://dev.obtenmas.com/catom/api/challenge/banks',
+  //   );
+  //   const data = await res.json();
+
+  //   setBankList(data);
+  // };
+
+  // useEffect(() => {
+  //   getBanks();
+  // }, []);
+  // useEffect(() => {
+  //   console.log(bankList);
+  // }, [bankList]);
 
   return (
-    <SafeAreaView style={[backgroundStyle, styles.safeAreaView]}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <View style={styles.mainView}>
-        <Text style={[styles.sectionTitle, textColorStyle]}>
-          {'Welcome bank app'}
-        </Text>
-      </View>
+    <SafeAreaView style={[styles.safeAreaView, backgroundStyle]}>
+      <NavigationContainer>
+        <BankStack />
+      </NavigationContainer>
     </SafeAreaView>
   );
 }
@@ -45,16 +39,6 @@ function App(): React.JSX.Element {
 const styles = StyleSheet.create({
   safeAreaView: {
     flex: 1,
-  },
-  mainView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    textAlign: 'center',
   },
 });
 
